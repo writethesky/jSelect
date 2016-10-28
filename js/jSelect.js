@@ -6,7 +6,6 @@
  * 支持selected默认选项
  * 支持键盘事件
  * */
-
 (function($) {
 	$.fn.extend({
 		jSelect: function(options) {
@@ -29,13 +28,13 @@
 			 * select对象构造函数
 			 */
 			function SelectObj(o) {
+				
 				//原select对象的引用
 				this.select = $(o);
 				this.selectId = this.select.attr("id") || Math.random();
 				
 				//原select内的相关数据存储
 				this.data = {};	
-				
 				this._init();
 			}
 			
@@ -61,12 +60,18 @@
 				 */
 				_initStructure: function() {
 					var	self = this;		
+					
+					
+					if($("#j_container_"+self.selectId)){
+						$("#j_container_"+self.selectId).remove();
+					}
+					
 					self.sContainer = $("<div></div>")
 									.attr("id", "j_container_"+self.selectId)
 									.addClass("j-container")
 									.insertAfter( self.select );
 									
-					self.arrowDown = $("<a href='javascript:;'></a>")
+					self.arrowDown = $("<a href='javascript:;'class='iconfont'>&#xe614;</a>")
 									.addClass("j-select-arrrowDown")
 									.appendTo(self.sContainer);
 								
@@ -86,6 +91,7 @@
 						$("<li>"+self.data.key[i]+"</li>").attr("list-value", self.data.value[i])
 															.appendTo(self.itemContainer);
 					});
+					
 					/*
 					 * 鼠标停留项目判断
 					 */
@@ -100,18 +106,24 @@
 					self.currentNextNum = self.data.value.length-1;
 					
 					self.select.find("option").each(function(i) {
-						if ( $(this).attr("selected") ) {
+						
+						if ( $(this).prop("selected") ) {
+							
 							self.currentIndex = self.index = i;
 							self.currentPrevNum = self.prevNum = i;
 							self.currentNextNum = self.nextNum = self.data.value.length-i-1;
 						}
+						
 					});
+					
 					var initView = self.itemContainer.find("li").eq(self.currentIndex).html();
 					self.viewContainer.html(initView);
 					self.itemContainer.find("li").eq(self.currentIndex).addClass(options.liActive);
 					
 					options.width = self.sContainer.width();
 					options.height = self.sContainer.height();
+					
+					
 				},
 				
 				/*
@@ -435,6 +447,7 @@
 					self.temptIndex = index;
 					
 					self.itemContainer.hide();
+					
 					self.itemContainer.find("li").eq(index).addClass(options.liActive);
 					self.listIsOpen = false;
 				},
@@ -506,6 +519,7 @@
 			 * 创建新的select控件对象
 			 */
 			$.each(this, function(i,o) {
+				
 				new SelectObj(o);
 			});
 		}
