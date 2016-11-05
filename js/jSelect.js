@@ -65,13 +65,17 @@
 					if($("#j_container_"+self.selectId)){
 						$("#j_container_"+self.selectId).remove();
 					}
-					
+					if($("#item_container_"+self.selectId)){
+						$("#item_container_"+self.selectId).remove();
+					}
 					self.sContainer = $("<div></div>")
 									.attr("id", "j_container_"+self.selectId)
 									.addClass("j-container")
 									.insertAfter( self.select );
 									
-					self.arrowDown = $("<a href='javascript:;'class='iconfont'>&#xe614;</a>")
+					self.arrowDown = $("<svg id='search_btn' class='icon' aria-hidden='true'>\
+		  <use xlink:href='#icon-xiala'></use>\
+		</svg>")
 									.addClass("j-select-arrrowDown")
 									.appendTo(self.sContainer);
 								
