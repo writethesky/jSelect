@@ -92,7 +92,7 @@
 										.appendTo( $(document.body) );
 					
 					$.each(self.data.key, function(i) {
-						$("<li>"+self.data.key[i]+"</li>").attr("list-value", self.data.value[i])
+						$("<li style='height: "+self.sContainer.height()+"px;'>"+self.data.key[i]+"</li>").attr("list-value", self.data.value[i])
 															.appendTo(self.itemContainer);
 					});
 					
