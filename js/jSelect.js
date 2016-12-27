@@ -89,10 +89,11 @@
 										.css("cursor", "default")
 										.addClass("j-select-list")
 										.hide()
-										.appendTo( $(document.body) );
+										.appendTo(self.sContainer );
+										
 					
 					$.each(self.data.key, function(i) {
-						$("<li style='height: "+self.sContainer.height()+"px;'>"+self.data.key[i]+"</li>").attr("list-value", self.data.value[i])
+						$("<li style='height: "+self.sContainer.height()+"px;line-height: "+self.sContainer.height()+"px;'>"+self.data.key[i]+"</li>").attr("list-value", self.data.value[i])
 															.appendTo(self.itemContainer);
 					});
 					
@@ -189,8 +190,8 @@
 						self.itemContainer.css({
 							position: "absolute",
 							width: width,
-							left: left,
-							top: top - (height*self.data.value.length)
+							left: '-1px',
+							top:  - (height*(self.data.value.length))
 						});
 						
 					} else {
@@ -200,8 +201,9 @@
 						self.itemContainer.css({
 							position: "absolute",
 							width: width,
-							left: left,
-							top: top + (options.top ? options.top : height)
+//							left: left,
+							left: '-1px',
+//							top: top + (options.top ? options.top : height)
 						});
 						
 					}

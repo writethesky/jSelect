@@ -1,3 +1,4 @@
+@charset "utf-8";
 ul,li,div {
 	margin:0;
 	padding:0;
@@ -11,7 +12,6 @@ ul, li {
 	width:143px;
 	height:19px;
 	border:#BCBCBC solid 1px;
-	overflow:hidden;
 }
 
 .j-select-arrrowDown {
