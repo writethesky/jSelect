@@ -70,13 +70,21 @@
 					}
 					self.sContainer = $("<div></div>")
 									.attr("id", "j_container_"+self.selectId)
-									.addClass("j-container")
+									.addClass("j-container").css({
+										width: this.select.width(),
+										height: this.select.height()
+									})
 									.insertAfter( self.select );
-									
+					var sContainerBorderWidth = (self.sContainer.css('border-width'));
+					sContainerBorderWidth = sContainerBorderWidth.substring(0, sContainerBorderWidth.length - 2);
+					console.log(sContainerBorderWidth);
 					self.arrowDown = $("<svg id='search_btn' class='icon' aria-hidden='true'>\
 		  <use xlink:href='#icon-xiala'></use>\
 		</svg>")
-									.addClass("j-select-arrrowDown")
+									.addClass("j-select-arrrowDown").css({
+										width: this.select.height() - 2* sContainerBorderWidth,
+										height: this.select.height() - 2* sContainerBorderWidth
+									})
 									.appendTo(self.sContainer);
 								
 					self.viewContainer = $("<div></div>")
@@ -91,9 +99,9 @@
 										.hide()
 										.appendTo(self.sContainer );
 										
-					
+					var select_height = this.select.height();
 					$.each(self.data.key, function(i) {
-						$("<li style='height: "+self.sContainer.height()+"px;line-height: "+self.sContainer.height()+"px;'>"+self.data.key[i]+"</li>").attr("list-value", self.data.value[i])
+						$("<li style='height: "+select_height+"px;line-height: "+select_height+"px;'>"+self.data.key[i]+"</li>").attr("list-value", self.data.value[i])
 															.appendTo(self.itemContainer);
 					});
 					
@@ -125,9 +133,8 @@
 					self.viewContainer.html(initView);
 					self.itemContainer.find("li").eq(self.currentIndex).addClass(options.liActive);
 					
-					options.width = self.sContainer.width();
-					options.height = self.sContainer.height();
-					
+					options.width = this.select.width();
+					options.height = this.select.height();
 					
 				},
 				
@@ -192,6 +199,7 @@
 							width: width,
 							left: '-1px',
 							top:  - (height*(self.data.value.length))
+//							top:  0
 						});
 						
 					} else {
@@ -204,6 +212,7 @@
 //							left: left,
 							left: '-1px',
 //							top: top + (options.top ? options.top : height)
+							top: height - 2
 						});
 						
 					}
@@ -239,7 +248,7 @@
 								height = options.height,
 								bodyHeight = document.documentElement.clientHeight,
 								scrollTop = document.documentElement.scrollTop;
-							
+						
 							self._setItemUlPosition(left, top, width, height, bodyHeight, scrollTop);
 
 							self.itemContainer.show();
